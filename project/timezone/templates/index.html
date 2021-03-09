@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django Timezone</title>
+  </head>
+  <body>
+    <h1>Django Timezone Test</h1>
+    <div>server datetime: <span id="server-datetime"></span></div>
+    <div>browser datetime: <span id="browser-datetime"></span></div>
+    <script>
+      // timefmt yyyy/MM/dd hh:mm:ss timezoneOffset
+      function timeFmt(date) {
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${date.getTimezoneOffset()}`;
+      }
+
+      // fetch django rest api
+      function fetchServerTime() {
+        fetch('now')
+          .then((resp) => resp.json())
+          .then(({now}) => {
+            document.getElementById('server-datetime').innerText = timeFmt(new Date(now));
+            document.getElementById('browser-datetime').innerText = timeFmt(new Date());
+          });
+      }
+
+      // fetch server time per second
+      setInterval(fetchServerTime, 1000);
+    </script>
+  </body>
+</html>
