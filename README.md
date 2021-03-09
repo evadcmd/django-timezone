@@ -10,4 +10,4 @@ $ docker-compose up -d --build
 
 ## access server datetime
 
-http://127.0.0.1/timezone
+http://127.0.0.1:8000/timezone
