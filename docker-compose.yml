@@ -9,8 +9,9 @@ services:
       target: server
     ports:
       - 8000:8000
-    restart: always
-    command: ./wait-for-it.sh db:5432 -- python3 ./project/manage.py runserver 0.0.0.0:8000
+    tty: true # keep the server container alive for testing
+    # restart: always
+    # command: ./wait-for-it.sh db:5432 -- python3 ./project/manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
   db:
